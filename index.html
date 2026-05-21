@@ -179,18 +179,10 @@ function updateCounter() {
 function setType(i, type) {
   pubs[i].type = type;
   pubs[i].value = '';
-  // Atualizar botões
   document.getElementById(`type-link-${i}`).classList.toggle('active', type === 'link');
   document.getElementById(`type-titulo-${i}`).classList.toggle('active', type === 'titulo');
-  // Atualizar placeholder do input
   const input = document.getElementById(`pub-input-${i}`);
-  if (type === 'link') {
-    input.placeholder = 'https://doi.org/... ou URL da publicação';
-    input.type = 'url';
-  } else {
-    input.placeholder = 'Título completo da publicação';
-    input.type = 'text';
-  }
+  input.placeholder = type === 'link' ? 'https://doi.org/... ou URL da publicação' : 'Título completo da publicação';
   input.value = '';
   updateCounter();
 }
@@ -219,7 +211,7 @@ function buildPubs() {
       </div>
       <div class="input-group" style="margin-bottom:.75rem">
         <svg class="input-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-        <input type="url" id="pub-input-${i}" placeholder="https://doi.org/... ou URL da publicação"
+        <input type="text" id="pub-input-${i}" placeholder="https://doi.org/... ou URL da publicação"
           oninput="pubs[${i}].value=this.value;updateCounter()">
       </div>
       <p class="field-label">Justificativa <span style="font-weight:400;color:var(--text3)">(opcional)</span></p>
@@ -261,7 +253,7 @@ async function submitForm() {
   pubs.forEach((p, i) => {
     if (p.value.trim()) {
       payload[`pub${i+1}_tipo`] = p.type === 'link' ? 'Link/DOI' : 'Título';
-      payload[`pub${i+1}_referencia`] = p.value.trim();
+      payload[`pub${i+1}_link_ou_titulo`] = p.value.trim();
       if (p.justificativa.trim()) {
         payload[`pub${i+1}_justificativa`] = p.justificativa.trim();
       }
