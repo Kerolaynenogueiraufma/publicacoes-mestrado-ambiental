@@ -260,10 +260,10 @@ async function submitForm() {
 
   pubs.forEach((p, i) => {
     if (p.value.trim()) {
-      payload[`publicacao_${i+1}_tipo`] = p.type === 'link' ? 'Link/DOI' : 'Título';
-      payload[`publicacao_${i+1}_${p.type}`] = p.value.trim();
+      payload[`pub${i+1}_tipo`] = p.type === 'link' ? 'Link/DOI' : 'Título';
+      payload[`pub${i+1}_referencia`] = p.value.trim();
       if (p.justificativa.trim()) {
-        payload[`publicacao_${i+1}_justificativa`] = p.justificativa.trim();
+        payload[`pub${i+1}_justificativa`] = p.justificativa.trim();
       }
     }
   });
