@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publicações Relevantes — Mestrado em Ciências Ambientais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F2ED;
+  --surface: #FFFFFF;
+  --surface2: #EDE9E2;
+  --border: #D6D0C6;
+  --text: #1A1814;
+  --text2: #5C574F;
+  --text3: #9C9488;
+  --accent: #2D6B4A;
+  --accent-light: #D4EAD8;
+  --warn: #C17B2A;
+  --warn-light: #FFF0D6;
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.hero{background:var(--accent);padding:3rem 2rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(255,255,255,.06) 0%,transparent 60%),radial-gradient(ellipse at 70% 20%,rgba(255,255,255,.04) 0%,transparent 50%)}
+.hero-tag{display:inline-block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:1rem;border:1px solid rgba(255,255,255,.2)}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);color:#fff;line-height:1.2;margin-bottom:.6rem}
+.hero p{font-size:15px;color:rgba(255,255,255,.75);max-width:500px;margin:0 auto}
+.container{max-width:700px;margin:0 auto;padding:2rem 1.25rem 4rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem}
+.info-banner{background:var(--accent-light);border:1px solid rgba(45,107,74,.2);border-radius:var(--radius);padding:.75rem 1rem;font-size:13px;color:#1D5235;display:flex;gap:10px;align-items:flex-start;margin-bottom:1.5rem;line-height:1.5}
+.info-banner svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:1px}
+.sect-label{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+@media(max-width:520px){.grid-2{grid-template-columns:1fr}}
+input[type=text],input[type=url]{width:100%;border:1px solid var(--border);border-radius:var(--radius);padding:9px 12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);transition:border-color .15s}
+input[type=text]:focus,input[type=url]:focus{outline:none;border-color:var(--accent);background:#fff}
+input[type=text]::placeholder,input[type=url]::placeholder{color:var(--text3)}
+textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);resize:vertical;min-height:80px;transition:border-color .15s;line-height:1.6}
+textarea:focus{outline:none;border-color:var(--accent);background:#fff}
+textarea::placeholder{color:var(--text3)}
+.field-label{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:6px}
+.pub-block{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:10px;position:relative;transition:border-color .2s}
+.pub-block:focus-within{border-color:var(--accent)}
+.pub-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.pub-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pub-num.empty{background:var(--surface2);color:var(--text3)}
+.pub-title-row{display:flex;align-items:center;gap:10px}
+.pub-status{font-size:11px;color:var(--text3)}
+.pub-status.ok{color:var(--accent);font-weight:500}
+.divider{height:1px;background:var(--border);margin:1rem 0}
+.type-toggle{display:flex;gap:6px;margin-bottom:1rem}
+.type-btn{flex:1;padding:7px;border-radius:var(--radius);border:1px solid var(--border);font-size:12px;font-weight:500;cursor:pointer;background:var(--bg);color:var(--text2);transition:all .15s;font-family:'DM Sans',sans-serif;text-align:center}
+.type-btn.active{background:var(--accent-light);border-color:var(--accent);color:#1D5235}
+.input-group{position:relative}
+.input-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.input-group input{padding-left:32px}
+.area-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem}
+.area-tag{padding:5px 12px;border-radius:20px;border:1px solid var(--border);font-size:12px;font-weight:500;cursor:pointer;background:var(--bg);color:var(--text2);transition:all .15s;font-family:'DM Sans',sans-serif}
+.area-tag:hover{border-color:var(--accent);color:var(--accent)}
+.area-tag.sel{background:var(--accent-light);border-color:var(--accent);color:#1D5235}
+.counter-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.counter-txt{font-size:13px;color:var(--text2)}
+.counter-txt span{font-weight:600;color:var(--accent)}
+.pills{display:flex;gap:4px}
+.pill{width:20px;height:6px;border-radius:3px;background:var(--border);transition:background .2s}
+.pill.filled{background:var(--accent)}
+.btn{width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:15px;font-weight:600;cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:.5rem}
+.btn:hover{background:#235A3C;transform:translateY(-1px);box-shadow:0 4px 16px rgba(45,107,74,.25)}
+.btn:active{transform:translateY(0)}
+.btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.btn:disabled{background:var(--text3);cursor:not-allowed;transform:none;box-shadow:none}
+.toast{background:#1D5235;color:#fff;border-radius:var(--radius);padding:12px 16px;font-size:13px;display:none;align-items:center;gap:10px;margin-top:1rem;animation:fadeIn .3s}
+.toast svg{width:18px;height:18px;stroke:#7ECC9A;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.footer{text-align:center;padding:2rem;font-size:12px;color:var(--text3)}
+.required{color:#C0392B;margin-left:2px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Mestrado em Ciências Ambientais</div>
+  <h1>Publicações Relevantes</h1>
+  <p>Indique as 5 publicações mais importantes para a composição do acervo bibliográfico do programa.</p>
+</div>
+
+<div class="container">
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem;border-left:4px solid var(--accent)">
+    <p style="font-size:13px;color:var(--text2);line-height:1.7">Indique até <strong>cinco produções</strong> — bibliográficas (artigo em periódico, livro e capítulo), artísticas ou técnicas/tecnológicas — referentes aos <strong>cinco anos anteriores</strong> à submissão da proposta. As indicações deverão vir acompanhadas de <strong>anexo ou link de acesso</strong> ao produto e de <strong>justificativa de aderência ao curso proposto</strong>. A produção deve estar distribuída entre todos os <strong>docentes permanentes</strong> e as publicações devem ser, predominantemente, em <strong>periódicos classificados nos níveis superiores dos percentis do Scopus</strong>.</p>
+  </div>
+
+  <div class="info-banner">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Para cada publicação, cole o <strong>link (DOI, URL)</strong> ou informe o <strong>título completo</strong>. Inclua a justificativa de aderência ao curso. Indique até 5 publicações.
+  </div>
+
+  <!-- IDENTIFICAÇÃO -->
+  <div class="card">
+    <p class="sect-label">Sua identificação</p>
+    <div class="grid-2">
+      <div>
+        <p class="field-label">Nome completo <span class="required">*</span></p>
+        <input type="text" id="nome" placeholder="Prof(a). Dr(a). ...">
+      </div>
+      <div>
+        <p class="field-label">Instituição / área</p>
+        <input type="text" id="inst" placeholder="Ex.: UFC — Ciências Ambientais">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PUBLICAÇÕES -->
+  <div class="card">
+    <p class="sect-label">Publicações indicadas</p>
+
+    <div class="counter-bar">
+      <p class="counter-txt">Preenchidas: <span id="count-txt">0</span> de 5</p>
+      <div class="pills" id="pills"></div>
+    </div>
+
+    <div id="pub-list"></div>
+  </div>
+
+  <button class="btn" onclick="submitForm()" id="btn-submit">
+    <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    Enviar indicações
+  </button>
+  <div class="toast" id="ok-toast">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="ok-msg">Indicações enviadas com sucesso!</span>
+  </div>
+
+</div>
+
+<div class="footer">Formulário de indicação bibliográfica — Mestrado em Ciências Ambientais</div>
+
+<script>
+const FORMSPREE = 'https://formspree.io/f/mdajepvq';
+
+// Estado de cada publicação: { type: 'link'|'titulo', value: '', justificativa: '' }
+const pubs = Array.from({length: 5}, () => ({ type: 'link', value: '', justificativa: '' }));
+
+// Pills
+const pillsEl = document.getElementById('pills');
+for (let i = 0; i < 5; i++) {
+  const p = document.createElement('div');
+  p.className = 'pill'; p.id = 'pill-' + i;
+  pillsEl.appendChild(p);
+}
+
+function updateCounter() {
+  const filled = pubs.filter(p => p.value.trim()).length;
+  document.getElementById('count-txt').textContent = filled;
+  for (let i = 0; i < 5; i++) {
+    document.getElementById('pill-' + i).classList.toggle('filled', i < filled);
+  }
+  // Atualizar badges dos blocos
+  pubs.forEach((p, i) => {
+    const num = document.getElementById('pub-num-' + i);
+    const status = document.getElementById('pub-status-' + i);
+    if (p.value.trim()) {
+      num.classList.remove('empty');
+      status.textContent = '✓ preenchida';
+      status.classList.add('ok');
+    } else {
+      num.classList.add('empty');
+      status.textContent = 'não preenchida';
+      status.classList.remove('ok');
+    }
+  });
+}
+
+function setType(i, type) {
+  pubs[i].type = type;
+  pubs[i].value = '';
+  // Atualizar botões
+  document.getElementById(`type-link-${i}`).classList.toggle('active', type === 'link');
+  document.getElementById(`type-titulo-${i}`).classList.toggle('active', type === 'titulo');
+  // Atualizar placeholder do input
+  const input = document.getElementById(`pub-input-${i}`);
+  if (type === 'link') {
+    input.placeholder = 'https://doi.org/... ou URL da publicação';
+    input.type = 'url';
+  } else {
+    input.placeholder = 'Título completo da publicação';
+    input.type = 'text';
+  }
+  input.value = '';
+  updateCounter();
+}
+
+function buildPubs() {
+  const container = document.getElementById('pub-list');
+  container.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const div = document.createElement('div');
+    div.className = 'pub-block';
+    div.innerHTML = `
+      <div class="pub-header">
+        <div class="pub-title-row">
+          <div class="pub-num empty" id="pub-num-${i}">${i+1}</div>
+          <p style="font-size:14px;font-weight:500;color:var(--text)">Publicação ${i+1}</p>
+        </div>
+        <span class="pub-status" id="pub-status-${i}">não preenchida</span>
+      </div>
+      <div class="type-toggle">
+        <button class="type-btn active" id="type-link-${i}" onclick="setType(${i},'link')">
+          🔗 Colar link / DOI
+        </button>
+        <button class="type-btn" id="type-titulo-${i}" onclick="setType(${i},'titulo')">
+          📝 Digitar título
+        </button>
+      </div>
+      <div class="input-group" style="margin-bottom:.75rem">
+        <svg class="input-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        <input type="url" id="pub-input-${i}" placeholder="https://doi.org/... ou URL da publicação"
+          oninput="pubs[${i}].value=this.value;updateCounter()">
+      </div>
+      <p class="field-label">Justificativa <span style="font-weight:400;color:var(--text3)">(opcional)</span></p>
+      <textarea id="pub-just-${i}" placeholder="Justificativa de aderência ao curso: como esta produção se relaciona com as linhas de pesquisa e disciplinas do Mestrado em Ciências Ambientais?"
+        oninput="pubs[${i}].justificativa=this.value" rows="3"></textarea>
+    `;
+    container.appendChild(div);
+    if (i < 4) {
+      const sep = document.createElement('div');
+      sep.style.cssText = 'height:4px';
+      container.appendChild(sep);
+    }
+  }
+}
+
+function toggleArea(btn) { btn.classList.toggle('sel'); }
+
+async function submitForm() {
+  const nome = document.getElementById('nome').value.trim();
+  if (!nome) { alert('Por favor, informe seu nome.'); return; }
+
+  const filled = pubs.filter(p => p.value.trim());
+  if (filled.length === 0) { alert('Indique ao menos uma publicação.'); return; }
+
+  const areas = [...document.querySelectorAll('.area-tag.sel')].map(b => b.textContent).join(', ');
+
+  const btn = document.getElementById('btn-submit');
+  btn.textContent = 'Enviando...'; btn.disabled = true;
+
+  // Monta payload
+  const payload = {
+    tipo: 'INDICAÇÃO DE PUBLICAÇÕES',
+    nome,
+    instituicao: document.getElementById('inst').value,
+    area_atuacao: areas || 'Não informada',
+    total_indicacoes: filled.length
+  };
+
+  pubs.forEach((p, i) => {
+    if (p.value.trim()) {
+      payload[`publicacao_${i+1}_tipo`] = p.type === 'link' ? 'Link/DOI' : 'Título';
+      payload[`publicacao_${i+1}_${p.type}`] = p.value.trim();
+      if (p.justificativa.trim()) {
+        payload[`publicacao_${i+1}_justificativa`] = p.justificativa.trim();
+      }
+    }
+  });
+
+  try {
+    const res = await fetch(FORMSPREE, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar indicações';
+    btn.disabled = false;
+
+    if (res.ok) {
+      const toast = document.getElementById('ok-toast');
+      document.getElementById('ok-msg').textContent = `${filled.length} publicação(ões) de ${nome} enviada(s) com sucesso!`;
+      toast.style.display = 'flex';
+      // Limpar
+      setTimeout(() => {
+        pubs.forEach((p, i) => {
+          p.value = ''; p.justificativa = ''; p.type = 'link';
+        });
+        buildPubs();
+        updateCounter();
+        document.getElementById('nome').value = '';
+        document.getElementById('inst').value = '';
+        document.querySelectorAll('.area-tag').forEach(b => b.classList.remove('sel'));
+      }, 5000);
+    } else {
+      alert('Erro ao enviar. Tente novamente.');
+    }
+  } catch(e) {
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar indicações';
+    btn.disabled = false;
+    alert('Erro de conexão. Verifique sua internet e tente novamente.');
+  }
+}
+
+// Init
+buildPubs();
+updateCounter();
+</script>
+</body>
+</html>
