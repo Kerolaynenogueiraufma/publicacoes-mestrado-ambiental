@@ -193,31 +193,72 @@ function buildPubs() {
   for (let i = 0; i < 5; i++) {
     const div = document.createElement('div');
     div.className = 'pub-block';
-    div.innerHTML = `
-      <div class="pub-header">
-        <div class="pub-title-row">
-          <div class="pub-num empty" id="pub-num-${i}">${i+1}</div>
-          <p style="font-size:14px;font-weight:500;color:var(--text)">Publicação ${i+1}</p>
-        </div>
-        <span class="pub-status" id="pub-status-${i}">não preenchida</span>
-      </div>
-      <div class="type-toggle">
-        <button class="type-btn active" id="type-link-${i}" onclick="setType(${i},'link')">
-          🔗 Colar link / DOI
-        </button>
-        <button class="type-btn" id="type-titulo-${i}" onclick="setType(${i},'titulo')">
-          📝 Digitar título
-        </button>
-      </div>
-      <div class="input-group" style="margin-bottom:.75rem">
-        <svg class="input-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-        <input type="text" id="pub-input-${i}" placeholder="https://doi.org/... ou URL da publicação"
-          oninput="pubs[${i}].value=this.value;updateCounter()">
-      </div>
-      <p class="field-label">Justificativa <span style="font-weight:400;color:var(--text3)">(opcional)</span></p>
-      <textarea id="pub-just-${i}" placeholder="Justificativa de aderência ao curso: como esta produção se relaciona com as linhas de pesquisa e disciplinas do Mestrado em Ciências Ambientais?"
-        oninput="pubs[${i}].justificativa=this.value" rows="3"></textarea>
-    `;
+
+    const num = document.createElement('div');
+    num.className = 'pub-num empty';
+    num.id = 'pub-num-' + i;
+    num.textContent = i + 1;
+
+    const status = document.createElement('span');
+    status.className = 'pub-status';
+    status.id = 'pub-status-' + i;
+    status.textContent = 'não preenchida';
+
+    const header = document.createElement('div');
+    header.className = 'pub-header';
+    const titleRow = document.createElement('div');
+    titleRow.className = 'pub-title-row';
+    const titleTxt = document.createElement('p');
+    titleTxt.style.cssText = 'font-size:14px;font-weight:500;color:var(--text)';
+    titleTxt.textContent = 'Publicação ' + (i + 1);
+    titleRow.appendChild(num);
+    titleRow.appendChild(titleTxt);
+    header.appendChild(titleRow);
+    header.appendChild(status);
+    div.appendChild(header);
+
+    // Toggle tipo
+    const toggle = document.createElement('div');
+    toggle.className = 'type-toggle';
+    const btnLink = document.createElement('button');
+    btnLink.className = 'type-btn active';
+    btnLink.id = 'type-link-' + i;
+    btnLink.textContent = '🔗 Colar link / DOI';
+    btnLink.onclick = (function(idx){ return function(){ setType(idx,'link'); }; })(i);
+    const btnTitulo = document.createElement('button');
+    btnTitulo.className = 'type-btn';
+    btnTitulo.id = 'type-titulo-' + i;
+    btnTitulo.textContent = '📝 Digitar título';
+    btnTitulo.onclick = (function(idx){ return function(){ setType(idx,'titulo'); }; })(i);
+    toggle.appendChild(btnLink);
+    toggle.appendChild(btnTitulo);
+    div.appendChild(toggle);
+
+    // Input
+    const inputWrap = document.createElement('div');
+    inputWrap.className = 'input-group';
+    inputWrap.style.marginBottom = '.75rem';
+    const inputEl = document.createElement('input');
+    inputEl.type = 'text';
+    inputEl.id = 'pub-input-' + i;
+    inputEl.placeholder = 'https://doi.org/... ou URL da publicação';
+    inputEl.oninput = (function(idx){ return function(){ pubs[idx].value = this.value; updateCounter(); }; })(i);
+    inputWrap.appendChild(inputEl);
+    div.appendChild(inputWrap);
+
+    // Justificativa
+    const justLabel = document.createElement('p');
+    justLabel.className = 'field-label';
+    justLabel.innerHTML = 'Justificativa <span style="font-weight:400;color:var(--text3)">(opcional)</span>';
+    div.appendChild(justLabel);
+
+    const justArea = document.createElement('textarea');
+    justArea.id = 'pub-just-' + i;
+    justArea.placeholder = 'Justificativa de aderência ao curso: como esta produção se relaciona com as linhas de pesquisa e disciplinas do Mestrado em Ciências Ambientais?';
+    justArea.rows = 3;
+    justArea.oninput = (function(idx){ return function(){ pubs[idx].justificativa = this.value; }; })(i);
+    div.appendChild(justArea);
+
     container.appendChild(div);
     if (i < 4) {
       const sep = document.createElement('div');
